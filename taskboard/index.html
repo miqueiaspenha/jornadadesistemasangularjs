@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="teste">
+  <head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+  </head>
+  <body ng-controller="EstoriaUsuario as estoriaUsuario">
+    <div ng-repeat="estoria in estoriaUsuario.estorias">
+      <h1>{{estoria.titulo}} </h1>
+      <h3>{{estoria.descricao}}</h3>
+      <h3>{{estoria.pontuacao}} pontos</h3>
+      <div ng-controller="TarefaUsuario as tarefa">
+        <button ng-click="tarefa.setStatus()">Tarefas</button>
+        <div ng-show="tarefa.isSet(1)">
+          <div ng-repeat="tarefa in estoria.tarefas">
+            <p>{{tarefa.nome}} - {{tarefa.descricao}} - Valor: {{tarefa.valor}}</p>
+          </div>
+          <form name="formularioTarefa" ng-submit="tarefa.addTarefa(estoria)">
+            <input type="text" ng-model="tarefa.tarefa.nome" placeholder="Sua Tarefa">
+            <input type="text" ng-model="tarefa.tarefa.descricao" placeholder="Digite a descrição">
+            <input type="text" ng-model="tarefa.tarefa.valor" placeholder="Digite o valor">
+            <input type="submit" value="Salvar">
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="js/angular.min.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
+

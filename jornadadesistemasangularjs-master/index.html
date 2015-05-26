@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
   </head>
   <body ng-controller="LojaControle as loja">
     <div ng-repeat="livro in loja.acervo">
@@ -24,9 +25,19 @@
         </div>
         <div ng-show="aba.isSet(2)">
           <h4>Comentários</h4>
-          <blockquote></blockquote>
+          <blockquote ng-repeat="comentario in livro.comentarios">{{comentario.autor}} disse: {{comentario.texto}}</blockquote>
+            <form name="comentarioForm" ng-controller="ComentarioControle as cmtControle" ng-submit="comentarioForm.$valid && cmtControle.addComentario(livro)" novalidate>
+            <blockquote>{{cmtControle.comentario.autor}} disse: {{cmtControle.comentario.texto}}</blockquote>
+            <p>
+              <input type="email" placeholder="Seu email" ng-model="cmtControle.comentario.autor" required />
+            </p>
+            <p>
+              <textarea placeholder="Deixe seu comentário" ng-model="cmtControle.comentario.texto" required></textarea>
+            </p>
+            <div>O formulario é {{comentarioForm.$valid}}</div>
+            <input type="submit" value="Adiconar">
+            </form>
         </div>
-
       </section>
     </div>
 
